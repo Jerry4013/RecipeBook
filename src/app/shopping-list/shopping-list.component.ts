@@ -3,7 +3,7 @@ import { Ingredient } from '../shared/ingredient.model';
 import {Observable, Subscription} from 'rxjs';
 import {LoggingService} from '../logging.service';
 import {Store} from '@ngrx/store';
-import * as fromShoppingList from './store/shopping-list.reducer';
+import * as fromApp from '../store/app.reducer';
 import * as ShoppingListActions from './store/shopping-list.actions';
 
 @Component({
@@ -16,11 +16,11 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   private igChangeSub: Subscription;
 
   constructor(private loggingService: LoggingService,
-              private store: Store<fromShoppingList.AppState>) { }
+              private store: Store<fromApp.AppState>) { }
 
   ngOnInit() {
     this.ingredients = this.store.select('shoppingList');
-    this.store.select('shoppingList').subscribe();
+    // this.store.select('shoppingList').subscribe();
     // this.ingredients = this.slService.getIngredients();
     // this.igChangeSub = this.slService.ingredientsChanged
     //   .subscribe(
@@ -32,7 +32,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.igChangeSub.unsubscribe();
+    // this.igChangeSub.unsubscribe();
   }
 
   onEditItem(index: number) {
